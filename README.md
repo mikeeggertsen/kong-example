@@ -12,7 +12,7 @@ This project demonstrates how to use **Kong** as an API gateway with a **Node.js
   - [Installation](#installation)
 - [Running the Application](#running-the-application)
   - [Development](#development)
-  - [Production with Kong API Gateway](#production-with-kong-api-gateway)
+  - [Production](#production)
 - [Environment Variables](#environment-variables)
 - [API Endpoints](#api-endpoints)
 - [Kong Configuration](#kong-configuration)
@@ -72,20 +72,33 @@ Before you begin, ensure you have the following installed:
 
 ### Development
 
-To run the application in development mode (without Kong):
+To run the application in development mode:
+
+1. Build and start the development Kong API Gateway service
+
+```sh
+docker compose -f docker-compose-dev.yml -d up
+```
+
+This will use the `kong-dev.yml` configuration file for Kong.
+
+2. Then start the Hono server in dev mode
 
 ```sh
 pnpm run dev
 ```
 
-The application will be accessible at `http://localhost:3000`.
+3. Access the application endpoints at:
+   - **Proxy**: `http://localhost:8000`
+   - **API**: `http://localhost:3000`
 
-### Production with Kong API Gateway
+### Production
 
 1. Build and start the services using Docker Compose:
-   ```sh
-   docker-compose up --build
-   ```
+
+```sh
+docker-compose -f docker-compose.yml -d up
+```
 
 2. Access the Kong API Gateway endpoints at:
    - **Proxy**: `http://localhost:8000`
@@ -128,7 +141,7 @@ The application provides the following endpoints:
 
 ## Kong Configuration
 
-The `kong.yml` file contains the declarative configuration for Kong:
+The `kong.yml` file contains the declarative configuration for Kong in production:
 
 ```yaml
 _format_version: "3.0"
