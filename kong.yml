@@ -2,7 +2,7 @@ _format_version: "3.0"
 
 services:
   - name: hello-world 
-    url: http://host.docker.internal:3000
+    url: http://api:3000
     routes:
       - name: hello-world-routes
         strip_path: false
@@ -10,7 +10,7 @@ services:
           - /hello-world
 
   - name: health
-    url: http://host.docker.internal:3000
+    url: http://api:3000
     routes:
       - name: health-routes
         strip_path: false
