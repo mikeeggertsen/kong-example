@@ -1,0 +1,25 @@
+_format_version: "3.0"
+
+services:
+  - name: hello-world 
+    url: http://host.docker.internal:3000
+    routes:
+      - name: hello-world-routes
+        strip_path: false
+        paths:
+          - /hello-world
+
+  - name: health
+    url: http://host.docker.internal:3000
+    routes:
+      - name: health-routes
+        strip_path: false
+        paths:
+          - /health
+
+plugins:
+  - name: rate-limiting
+    service: hello-world
+    config: 
+      minute: 5
+      policy: local
